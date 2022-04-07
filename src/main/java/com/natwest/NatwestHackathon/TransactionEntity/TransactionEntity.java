@@ -8,15 +8,21 @@ import javax.persistence.Id;
 @Entity
 public class TransactionEntity {
 	private @Id @GeneratedValue Long id;
-	private long accountNumber;
+	private String accountNumber;
 	private String accountType;
-	private int transactionAmount;
+	private String transactionAmount;
 	private String transactionCurrency;
-	private long accountFrom;
+	private String accountFrom;
 	
 	
-	public TransactionEntity(Long id, long accountNumber, String accountType, int transactionAmount,
-			String transactionCurrency, long accountFrom) {
+	
+	public TransactionEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public TransactionEntity(Long id, String accountNumber, String accountType, String transactionAmount,
+			String transactionCurrency, String accountFrom) {
 		super();
 		this.id = id;
 		this.accountNumber = accountNumber;
@@ -32,10 +38,10 @@ public class TransactionEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public long getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(long accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	public String getAccountType() {
@@ -44,10 +50,10 @@ public class TransactionEntity {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	public int gettransactionAmount() {
+	public String getTransactionAmount() {
 		return transactionAmount;
 	}
-	public void settransactionAmount(int transactionAmount) {
+	public void setTransactionAmount(String transactionAmount) {
 		this.transactionAmount = transactionAmount;
 	}
 	public String getTransactionCurrency() {
@@ -56,19 +62,19 @@ public class TransactionEntity {
 	public void setTransactionCurrency(String transactionCurrency) {
 		this.transactionCurrency = transactionCurrency;
 	}
-	public long getAccountFrom() {
+	public String getAccountFrom() {
 		return accountFrom;
 	}
-	public void setAccountFrom(long accountFrom) {
+	public void setAccountFrom(String accountFrom) {
 		this.accountFrom = accountFrom;
 	}
-
 	@Override
 	public String toString() {
 		return "TransactionEntity [id=" + id + ", accountNumber=" + accountNumber + ", accountType=" + accountType
 				+ ", transactionAmount=" + transactionAmount + ", transactionCurrency=" + transactionCurrency
 				+ ", accountFrom=" + accountFrom + "]";
 	}
+	
 	
 	
 }
