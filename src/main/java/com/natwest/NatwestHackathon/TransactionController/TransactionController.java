@@ -47,7 +47,7 @@ public class TransactionController {
 		transactionObj.setTransactionAmount(Base64.getEncoder().encodeToString(transactionObj.getTransactionAmount().getBytes()));
 		transactionObj.setTransactionCurrency(Base64.getEncoder().encodeToString(transactionObj.getTransactionCurrency().getBytes()));
 		
-		System.out.print(Base64.getDecoder().decode(transactionObj.getAccountNumber()));
+		System.out.print(Base64.getDecoder().decode("OTg3NjU0MzIxMDEy"));
 		
 	 
 		 //transactionRepository.save(transactionObj);
