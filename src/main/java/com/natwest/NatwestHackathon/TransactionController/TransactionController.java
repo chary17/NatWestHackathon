@@ -39,29 +39,18 @@ public class TransactionController {
 	}
 	
 	@PostMapping("/transaction")
-	ResponseEntity<TransactionEntity> newTransaction(@RequestBody TransactionEntity transactionObj) throws URISyntaxException {
+	   ResponseEntity<Object> newTransaction(@RequestBody TransactionEntity transactionObj) throws URISyntaxException {
 	
 		transactionObj.setAccountFrom(Base64.getEncoder().encodeToString(transactionObj.getAccountFrom().getBytes()));
 		transactionObj.setAccountNumber(Base64.getEncoder().encodeToString(transactionObj.getAccountNumber().getBytes()));
 		transactionObj.setAccountType(Base64.getEncoder().encodeToString(transactionObj.getAccountType().getBytes()));
 		transactionObj.setTransactionAmount(Base64.getEncoder().encodeToString(transactionObj.getTransactionAmount().getBytes()));
 		transactionObj.setTransactionCurrency(Base64.getEncoder().encodeToString(transactionObj.getTransactionCurrency().getBytes()));
-		
-		
-		 //transactionRepository.save(transactionObj);
-		
-		 ResponseEntity<TransactionEntity> entity =  new ResponseEntity<>(transactionObj,HttpStatus.CREATED);
 		 
-		 /*status(HttpStatus.CREATED).body(Map.of
-			 (
-					 "StatusCode",201,
-					 "Data", transactionObj));
-		*/
-		 
-		receiverPostrequestCall(transactionObj);
+		 receiverPostrequestCall(transactionObj);
 		
-		return entity;
-		}
+		 return new ResponseEntity<>(HttpStatus.OK);
+		 }
 	
 	public void receiverPostrequestCall(TransactionEntity transactionObj) throws URISyntaxException {
 	
@@ -70,11 +59,11 @@ public class TransactionController {
 
 		URI uri = new URI("http://localhost:8082/decrpted/transaction");
 		
-		transactionObj.setAccountFrom(String.valueOf(Base64.getDecoder().decode(transactionObj.getAccountFrom())));
-		transactionObj.setAccountNumber(Base64.getDecoder().decode(transactionObj.getAccountNumber()).toString());
-		transactionObj.setAccountType(Base64.getDecoder().decode(transactionObj.getAccountType()).toString());
-		transactionObj.setTransactionAmount(Base64.getDecoder().decode(transactionObj.getTransactionAmount()).toString());
-		transactionObj.setTransactionCurrency(Base64.getDecoder().decode(transactionObj.getTransactionCurrency()).toString());
+		transactionObj.setAccountFrom(new String(Base64.getDecoder().decode(transactionObj.getAccountFrom())));
+		transactionObj.setAccountNumber(new String(Base64.getDecoder().decode(transactionObj.getAccountNumber())));
+		transactionObj.setAccountType(new String(Base64.getDecoder().decode(transactionObj.getAccountType())));
+		transactionObj.setTransactionAmount(new String(Base64.getDecoder().decode(transactionObj.getTransactionAmount())));
+		transactionObj.setTransactionCurrency(new String(Base64.getDecoder().decode(transactionObj.getTransactionCurrency())));
 		
 		HttpEntity<TransactionEntity> httpEntity = new HttpEntity<>(transactionObj, headers);
 
