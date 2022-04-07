@@ -47,12 +47,12 @@ public class TransactionController {
 		transactionObj.setTransactionAmount(Base64.getEncoder().encodeToString(transactionObj.getTransactionAmount().getBytes()));
 		transactionObj.setTransactionCurrency(Base64.getEncoder().encodeToString(transactionObj.getTransactionCurrency().getBytes()));
 		 
-		 receiverPostrequestCall(transactionObj);
+		senderRequestCallreceiver(transactionObj);
 		
 		 return new ResponseEntity<>(HttpStatus.OK);
 		 }
 	
-	public void receiverPostrequestCall(TransactionEntity transactionObj) throws URISyntaxException {
+	public void senderRequestCallreceiver(TransactionEntity transactionObj) throws URISyntaxException {
 	
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -73,7 +73,7 @@ public class TransactionController {
 	}
 	
 	@PostMapping("/decrpted/transaction")
-	public void  decrytTransaction(@RequestBody TransactionEntity transactionObj) {
+	public void  decrytedTransaction(@RequestBody TransactionEntity transactionObj) {
 	
 	//System.out.print(Base64.getDecoder().decode("OTg3NjU0MzIxMDEy"));
 		
