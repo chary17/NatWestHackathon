@@ -47,9 +47,7 @@ public class TransactionController {
 		transactionObj.setTransactionAmount(Base64.getEncoder().encodeToString(transactionObj.getTransactionAmount().getBytes()));
 		transactionObj.setTransactionCurrency(Base64.getEncoder().encodeToString(transactionObj.getTransactionCurrency().getBytes()));
 		
-		System.out.print(Base64.getDecoder().decode("OTg3NjU0MzIxMDEy"));
 		
-	 
 		 //transactionRepository.save(transactionObj);
 		
 		 ResponseEntity<TransactionEntity> entity =  new ResponseEntity<>(transactionObj,HttpStatus.CREATED);
@@ -72,8 +70,7 @@ public class TransactionController {
 
 		URI uri = new URI("http://localhost:8082/decrpted/transaction");
 		
-		//transactionObj.setAccountFrom(String.valueOf(Base64.getDecoder().decode(transactionObj.getAccountFrom())));
-		System.out.print(Base64.getDecoder().decode(transactionObj.getAccountNumber()));
+		transactionObj.setAccountFrom(String.valueOf(Base64.getDecoder().decode(transactionObj.getAccountFrom())));
 		transactionObj.setAccountNumber(Base64.getDecoder().decode(transactionObj.getAccountNumber()).toString());
 		transactionObj.setAccountType(Base64.getDecoder().decode(transactionObj.getAccountType()).toString());
 		transactionObj.setTransactionAmount(Base64.getDecoder().decode(transactionObj.getTransactionAmount()).toString());
@@ -87,9 +84,11 @@ public class TransactionController {
 	}
 	
 	@PostMapping("/decrpted/transaction")
-	TransactionEntity decrytTransaction(@RequestBody TransactionEntity transactionObj) {
+	public void  decrytTransaction(@RequestBody TransactionEntity transactionObj) {
+	
+	//System.out.print(Base64.getDecoder().decode("OTg3NjU0MzIxMDEy"));
 		
-		return transactionRepository.save(transactionObj);
+	 transactionRepository.save(transactionObj);
 		
 	}
 }
